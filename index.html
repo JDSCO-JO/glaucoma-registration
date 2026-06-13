@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -30,7 +30,7 @@
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col justify-between overflow-x-hidden">
 
-    <!-- Top Banner / Event Header - Mobile Optimized Padding -->
+    <!-- Top Banner / Event Header -->
     <header class="gradient-bg text-white py-8 md:py-12 px-4 md:px-6 text-center relative overflow-hidden shadow-lg">
         <div class="absolute inset-0 opacity-10">
             <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
@@ -48,7 +48,6 @@
             <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold mt-2 mb-3 tracking-tight leading-tight">Approach to Patients with Glaucoma</h1>
             <p class="text-teal-200 text-sm sm:text-base md:text-xl font-medium mb-6 max-w-2xl mx-auto">Expert clinical guidance on diagnosis, monitoring, and management.</p>
             
-            <!-- Quick Meta Info Grid - Fully Responsive Layout -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-xs sm:text-sm bg-slate-900/40 p-4 rounded-xl backdrop-blur-sm text-left sm:text-center">
                 <div class="flex items-center sm:justify-center gap-2.5">
                     <i class="fa-solid fa-user-doctor text-teal-400 text-base flex-shrink-0"></i>
@@ -66,7 +65,15 @@
         </div>
     </header>
 
-    <!-- Main Dynamic Content Area - Responsive Margins -->
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-950/50 z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-5 rounded-2xl shadow-xl flex items-center gap-3">
+            <i class="fa-solid fa-spinner animate-spin text-teal-600 text-2xl"></i>
+            <span class="font-semibold text-sm text-slate-700">Connecting to cloud secure server...</span>
+        </div>
+    </div>
+
+    <!-- Main Dynamic Content Area -->
     <main class="max-w-4xl w-full mx-auto px-4 py-6 md:py-10 flex-grow">
         
         <!-- Portal Selection View -->
@@ -76,7 +83,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                 
-                <!-- Card 1: Face to Face (Mobile Touch Enhanced) -->
+                <!-- Card 1: Face to Face -->
                 <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-teal-600 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
                     <div class="absolute top-0 right-0 bg-teal-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl tracking-wide">LIMITED SEATS</div>
                     <div class="mb-6">
@@ -93,7 +100,7 @@
                             </div>
                             <div class="flex items-center gap-3 text-sm text-slate-600">
                                 <i class="fa-solid fa-chair text-teal-600 w-5 flex-shrink-0"></i>
-                                <span>Only <strong id="remaining-seats-badge" class="text-teal-700">30</strong> seats total available</span>
+                                <span>Remaining Seats: <strong id="remaining-seats-badge" class="text-teal-700">--</strong> / 30</span>
                             </div>
                         </div>
                     </div>
@@ -105,7 +112,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Online (Mobile Touch Enhanced) -->
+                <!-- Card 2: Online -->
                 <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-blue-600 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
                     <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl tracking-wide">UNLIMITED PATH</div>
                     <div class="mb-6">
@@ -134,7 +141,7 @@
             </div>
         </div>
 
-        <!-- Registration Form View (Mobile friendly inputs) -->
+        <!-- Registration Form View -->
         <div id="form-view" class="hidden max-w-lg mx-auto bg-white border border-slate-200 rounded-2xl shadow-md p-5 sm:p-8">
             <button onclick="goBack()" class="text-slate-400 hover:text-slate-600 mb-5 flex items-center gap-2 text-sm font-medium py-1">
                 <i class="fa-solid fa-arrow-left"></i> Back to options
@@ -214,7 +221,6 @@
             <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Registration Successful!</h3>
             <p id="success-message" class="text-slate-500 text-sm mb-6 leading-relaxed"></p>
 
-            <!-- Teams Access Box - Styled wonderfully for fingers and mobile taps -->
             <div id="online-meeting-box" class="hidden bg-blue-50 border border-blue-100 p-4 sm:p-5 rounded-xl text-left mb-6">
                 <h4 class="font-bold text-blue-950 text-sm flex items-center gap-2 mb-2">
                     <i class="fa-brands fa-microsoft-teams text-blue-600 text-lg"></i>
@@ -224,37 +230,13 @@
                 
                 <a href="https://teams.microsoft.com/l/meetup-join/mock-link-glaucoma-seminar" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-3.5 rounded-xl font-semibold transition-all text-center leading-relaxed shadow-sm active:scale-95">
                     <span class="block text-[11px] font-bold uppercase tracking-wider mb-1">Click to Join Meeting</span>
-                    <span class="block text-[10px] opacity-90 italic whitespace-normal">Approach to patients with glaucoma by Prof. Wisam Shehadeh | Meeting-Join | Microsoft Teams</span>
+                    <span class="block text-[10px] opacity-90 italic">Approach to patients with glaucoma by Prof. Wisam Shehadeh | Microsoft Teams</span>
                 </a>
             </div>
 
             <button onclick="goHome()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-sm font-semibold transition-all">
                 Close & Return
             </button>
-        </div>
-
-        <!-- Hidden Simulated Email Alert -->
-        <div id="email-trigger-modal" class="hidden fixed inset-0 bg-slate-950/60 z-50 flex items-center justify-center px-4">
-            <div class="bg-slate-900 text-white max-w-md w-full rounded-2xl shadow-2xl p-6 border border-slate-800">
-                <div class="flex items-center gap-3 text-amber-500 mb-4">
-                    <i class="fa-solid fa-bell-on text-2xl animate-bounce"></i>
-                    <h4 class="text-lg font-bold">Automatic Email Sent (To Asem)</h4>
-                </div>
-                <div class="bg-slate-950 p-4 rounded-xl text-xs space-y-2 border border-slate-800 font-mono overflow-x-auto">
-                    <div class="text-slate-500">From: registration-system@events.com</div>
-                    <div class="text-slate-500">To: Your Configured Inbox</div>
-                    <div class="text-teal-400 font-bold">Subject: ATTENTION: F2F Seminar Glaucoma Reached Limit (30 Responses)!</div>
-                    <hr class="border-slate-800 my-2">
-                    <div class="text-slate-300">
-                        Dear Asem,<br><br>
-                        This is an automated notification. The <strong>Face-to-Face</strong> registration portal for the event <strong>"Approach to patients with glaucoma"</strong> has just reached its absolute capacity of <strong>30 attendees</strong>.<br><br>
-                        The portal has now locked and will not accept any further responses.
-                    </div>
-                </div>
-                <button onclick="closeEmailModal()" class="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-slate-950 py-2.5 rounded-xl text-xs font-bold transition-all">
-                    Acknowledge Alert
-                </button>
-            </div>
         </div>
 
         <!-- Security Password Modal UI -->
@@ -270,9 +252,9 @@
                 <p class="text-slate-500 text-xs mb-5">Please enter the security password to unlock settings.</p>
                 
                 <form onsubmit="handlePasswordSubmit(event)" class="space-y-4">
-                    <input type="password" id="admin-pass-input" placeholder="••••••••" required class="w-full text-center tracking-widest px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-800 transition-all">
+                    <input type="password" id="admin-pass-input" placeholder="••••••••" required class="w-full text-center tracking-widest px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
                     <div id="pass-error-msg" class="hidden text-rose-600 text-xs font-medium">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Incorrect password! Access denied.
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Incorrect password!
                     </div>
                     <button type="submit" class="w-full bg-slate-900 hover:bg-slate-950 text-white py-3 rounded-xl text-xs font-semibold shadow transition-all">
                         Unlock Dashboard
@@ -281,73 +263,32 @@
             </div>
         </div>
 
-        <!-- ADMIN DASHBOARD PANEL - Fully responsive statistics & list table -->
+        <!-- ADMIN DASHBOARD PANEL - Cloud Realtime Table -->
         <div id="admin-panel" class="hidden mt-8 bg-slate-900 text-slate-100 rounded-2xl p-4 sm:p-6 border border-slate-800 shadow-xl">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
                 <div>
-                    <h3 class="text-lg font-bold text-teal-400">Admin Dashboard</h3>
-                    <p class="text-slate-400 text-xs mt-0.5">Manage attendees and simulate custom numbers for testing.</p>
+                    <h3 class="text-lg font-bold text-teal-400">Global Admin Dashboard (Cloud Database)</h3>
+                    <p class="text-slate-400 text-xs mt-0.5">Showing live records combined from all devices.</p>
                 </div>
-                <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-                    <button onclick="downloadCSV()" class="flex-1 sm:flex-initial bg-teal-600 hover:bg-teal-700 text-white text-xs px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-all">
-                        <i class="fa-solid fa-file-csv"></i> Export CSV
-                    </button>
-                    <button onclick="clearDatabase()" class="flex-1 sm:flex-initial bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-800/40 text-xs px-3 py-2 rounded-lg font-semibold transition-all">
-                        Clear All
-                    </button>
-                </div>
-            </div>
-
-            <!-- EmailJS Configuration form inside Admin Panel -->
-            <div class="bg-slate-950 p-4 sm:p-5 rounded-xl border border-slate-800 mb-6">
-                <h4 class="text-sm font-bold text-teal-400 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-plug"></i> Live Email Connector (EmailJS Setup)
-                </h4>
-                <p class="text-slate-400 text-[11px] mb-4">Your personalized keys are active and embedded in the file. You can override them here if you ever change your EmailJS account.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div>
-                        <label class="block text-slate-400 mb-1">EmailJS Public Key</label>
-                        <input type="text" id="admin-public-key" placeholder="user_xxxxxx" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-white outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">EmailJS Service ID</label>
-                        <input type="text" id="admin-service-id" placeholder="service_xxxxxx" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-white outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">EmailJS Template ID</label>
-                        <input type="text" id="admin-template-id" placeholder="template_xxxxxx" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-white outline-none">
-                    </div>
-                </div>
-                <button onclick="saveKeys()" class="mt-4 bg-teal-600 hover:bg-teal-700 text-white text-xs px-4 py-2.5 rounded-lg font-bold transition-all w-full sm:w-auto">
-                    Override & Save Custom Keys
+                <button onclick="fetchCloudData()" class="bg-teal-600 hover:bg-teal-700 text-white text-xs px-3 py-2 rounded-lg font-semibold transition-all">
+                    <i class="fa-solid fa-rotate"></i> Refresh Cloud Data
                 </button>
-                <div id="save-success-msg" class="hidden text-emerald-400 text-xs mt-2 font-medium">
-                    <i class="fa-solid fa-circle-check"></i> Keys saved successfully! Live email notifications are active.
-                </div>
             </div>
 
             <!-- Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                    <div class="text-slate-400 text-xs">F2F Registered</div>
+                    <div class="text-slate-400 text-xs">Total F2F Registered (All Phones)</div>
                     <div class="text-2xl font-bold text-white mt-1" id="admin-f2f-count">0 / 30</div>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                    <div class="text-slate-400 text-xs">Online Registered</div>
+                    <div class="text-slate-400 text-xs">Total Online Registered (All Phones)</div>
                     <div class="text-2xl font-bold text-white mt-1" id="admin-online-count">0</div>
-                </div>
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between gap-2">
-                    <div>
-                        <div class="text-slate-400 text-xs">Simulation Action</div>
-                        <button onclick="injectMockRecords()" class="text-[11px] mt-1.5 text-teal-400 hover:underline">Inject 29 Mock Records</button>
-                    </div>
-                    <i class="fa-solid fa-bug text-slate-800 text-3xl"></i>
                 </div>
             </div>
 
-            <!-- Scrollable Table for Mobile Devices -->
-            <div class="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <!-- Scrollable Table -->
+            <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs min-w-[500px]">
                     <thead>
                         <tr class="border-b border-slate-800 text-slate-400">
@@ -359,6 +300,7 @@
                         </tr>
                     </thead>
                     <tbody id="admin-table-body" class="divide-y divide-slate-800 text-slate-300">
+                        <tr><td colspan="5" class="py-4 text-center text-slate-500 italic">Enter password to load cloud records...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -366,12 +308,11 @@
 
     </main>
 
-    <!-- Footer with Secret Trigger to Admin Console -->
+    <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 px-4 text-center">
         <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-            <!-- Double click on this copyright text to trigger password prompt -->
             <p id="secret-trigger" ondblclick="openPasswordModal()" class="cursor-default select-none hover:text-slate-600 transition-colors py-2 w-full text-center">
-                © 2026 Scientific Seminars. All rights reserved.
+                © 2026 Scientific Seminars. All rights reserved. (Double click for Admin)
             </p>
         </div>
     </footer>
@@ -379,318 +320,178 @@
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-    <!-- Web App Functionality & Logic Script -->
     <script>
-        const STORAGE_KEY = 'glaucoma_event_attendees';
+        // السيرفر السحابي الجاهز والمفعل الآن لجمع كافة المدخلات مركزياً فوراً
+        const CLOUD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzL5T1rG_g7FzCszP3T1-eD2V6yKqU2kX_rYq62Q7jC_6Y_73k/exec";
+        
         const CAPACITY_LIMIT = 30;
+        let globalAttendeesList = [];
+        let globalF2FCount = 0;
 
-        // Your embedded EmailJS keys
         const savedPublicKey = "yCaH2C-1PrWSlLD8d";
         const savedServiceId = "service_efmfuyn";
         const savedTemplateId = "template_hbq4mgk";
-
-        const activePublicKey = localStorage.getItem('emailjs_public_key') || savedPublicKey;
-        if (activePublicKey) {
-            emailjs.init(activePublicKey);
-        }
-
-        function getAttendees() {
-            const data = localStorage.getItem(STORAGE_KEY);
-            return data ? JSON.parse(data) : [];
-        }
-
-        function saveAttendees(list) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-            updateUI();
-        }
+        emailjs.init(savedPublicKey);
 
         const selectionView = document.getElementById('selection-view');
         const formView = document.getElementById('form-view');
         const successView = document.getElementById('success-view');
         const regForm = document.getElementById('reg-form');
-        
-        function openRegistration(type) {
-            const attendees = getAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
+        const loadingOverlay = document.getElementById('loading-overlay');
 
-            if (type === 'f2f' && f2fCount >= CAPACITY_LIMIT) {
-                alert("Sorry! This in-person session is fully booked. Please register for Online attendance.");
+        async function fetchCloudData() {
+            try {
+                const response = await fetch(CLOUD_SCRIPT_URL);
+                const data = await response.json();
+                globalAttendeesList = data;
+                
+                globalF2FCount = data.filter(a => a.type === 'f2f' || a.type === 'Face-to-Face').length;
+                const onlineCount = data.filter(a => a.type === 'online' || a.type === 'Online').length;
+                
+                const remaining = Math.max(0, CAPACITY_LIMIT - globalF2FCount);
+                document.getElementById('remaining-seats-badge').innerText = remaining;
+
+                if (globalF2FCount >= CAPACITY_LIMIT) {
+                    document.getElementById('btn-f2f-select').classList.add('hidden');
+                    document.getElementById('f2f-soldout-message').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-f2f-select').classList.remove('hidden');
+                    document.getElementById('f2f-soldout-message').classList.add('hidden');
+                }
+
+                document.getElementById('admin-f2f-count').innerText = `${globalF2FCount} / ${CAPACITY_LIMIT}`;
+                document.getElementById('admin-online-count').innerText = onlineCount;
+                renderAdminTable();
+            } catch (err) {
+                console.error("Error connecting to database: ", err);
+            }
+        }
+
+        function openRegistration(type) {
+            if (type === 'f2f' && globalF2FCount >= CAPACITY_LIMIT) {
+                alert("Sorry! This in-person session is fully booked.");
                 return;
             }
-
+            document.getElementById('input-type').value = type;
             const badge = document.getElementById('form-badge');
             const subtext = document.getElementById('form-subtext');
-            document.getElementById('input-type').value = type;
 
             if (type === 'f2f') {
                 badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-teal-100 text-teal-800";
                 badge.innerText = "In-Person (Hotel Venue)";
-                subtext.innerHTML = '<i class="fa-solid fa-hotel text-xs"></i> Venue: Sheraton Hotel at 07:00 PM';
+                subtext.innerHTML = 'Venue: Sheraton Hotel at 07:00 PM';
             } else {
                 badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-blue-100 text-blue-800";
                 badge.innerText = "Online Session";
-                subtext.innerHTML = '<i class="fa-brands fa-microsoft-teams text-xs"></i> Venue: Microsoft Teams Stream at 07:00 PM';
+                subtext.innerHTML = 'Venue: Microsoft Teams Stream at 07:00 PM';
             }
 
             selectionView.classList.add('hidden');
             formView.classList.remove('hidden');
-            window.scrollTo({ top: 100, behavior: 'smooth' });
         }
 
-        function goBack() {
-            formView.classList.add('hidden');
-            selectionView.classList.remove('hidden');
-            regForm.reset();
-        }
-
-        function goHome() {
-            successView.classList.add('hidden');
-            selectionView.classList.remove('hidden');
-            regForm.reset();
-        }
-
-        function submitForm(event) {
+        async function submitForm(event) {
             event.preventDefault();
+            loadingOverlay.classList.remove('hidden');
+
             const type = document.getElementById('input-type').value;
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const specialty = document.getElementById('specialty').value;
 
-            const attendees = getAttendees();
-            const currentF2fCount = attendees.filter(a => a.type === 'f2f').length;
-            
-            if (type === 'f2f' && currentF2fCount >= CAPACITY_LIMIT) {
-                alert("Unfortunately, the venue has just hit the capacity limit. Please register Online.");
-                goBack();
-                return;
-            }
+            try {
+                const formData = new FormData();
+                formData.append('type', type);
+                formData.append('fullName', fullName);
+                formData.append('email', email);
+                formData.append('phone', phone);
+                formData.append('specialty', specialty);
 
-            const newAttendee = { type, fullName, email, phone, specialty, date: new Date().toISOString() };
-            attendees.push(newAttendee);
-            saveAttendees(attendees);
+                await fetch(CLOUD_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                await fetchCloudData();
 
-            const updatedF2fCount = attendees.filter(a => a.type === 'f2f').length;
-
-            // Send notification only when F2F capacity reaches exactly 30 limit
-            if (type === 'f2f' && updatedF2fCount === CAPACITY_LIMIT) {
-                const srvId = localStorage.getItem('emailjs_service_id') || savedServiceId;
-                const tmpId = localStorage.getItem('emailjs_template_id') || savedTemplateId;
-
-                if (activePublicKey && srvId && tmpId) {
+                if (type === 'f2f' && globalF2FCount === CAPACITY_LIMIT) {
                     const emailParams = {
                         attendee_name: fullName,
                         attendee_email: email,
                         attendee_phone: phone,
                         attendee_specialty: specialty,
-                        registration_type: 'Face-to-Face (Hotel) - CLOSING SEAT',
-                        f2f_count: updatedF2fCount
+                        registration_type: 'Face-to-Face (Hotel) - CAPACITY REACHED',
+                        f2f_count: globalF2FCount
                     };
-
-                    emailjs.send(srvId, tmpId, emailParams)
-                        .then(response => {
-                            console.log('Limit reached email notification sent successfully!', response.status, response.text);
-                        }, error => {
-                            console.error('Failed to send limit email notice...', error);
-                        });
+                    await emailjs.send(savedServiceId, savedTemplateId, emailParams);
                 }
 
-                setTimeout(() => {
-                    document.getElementById('email-trigger-modal').classList.remove('hidden');
-                }, 800);
+                const successMsg = document.getElementById('success-message');
+                const onlineBox = document.getElementById('online-meeting-box');
+                
+                if (type === 'f2f') {
+                    successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! You have successfully booked a live seat at the <strong>Sheraton Hotel</strong>.`;
+                    onlineBox.classList.add('hidden');
+                } else {
+                    successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! Registered for the digital broadcast successfully.`;
+                    onlineBox.classList.remove('hidden');
+                }
+
+                formView.classList.add('hidden');
+                successView.classList.remove('hidden');
+
+            } catch (error) {
+                alert("Database submission failed. Please try again.");
+                console.error(error);
+            } finally {
+                loadingOverlay.classList.add('hidden');
             }
+        }
 
-            const successMsg = document.getElementById('success-message');
-            const onlineBox = document.getElementById('online-meeting-box');
-            
-            if (type === 'f2f') {
-                successMsg.innerHTML = `Welcome on board, <strong>${fullName}</strong>! You have successfully booked an in-person seat at the <strong>Sheraton Hotel</strong>. A seat confirmation voucher will be sent to <strong>${email}</strong>.`;
-                onlineBox.classList.add('hidden');
-            } else {
-                successMsg.innerHTML = `Welcome on board, <strong>${fullName}</strong>! You are successfully registered for the live digital broadcast. Below is your Microsoft Teams room access.`;
-                onlineBox.classList.remove('hidden');
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = '';
+            if (globalAttendeesList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-500 italic">No registrations found in the cloud database.</td></tr>`;
+                return;
             }
-
-            formView.classList.add('hidden');
-            successView.classList.remove('hidden');
-        }
-
-        function closeEmailModal() {
-            document.getElementById('email-trigger-modal').classList.add('hidden');
-        }
-
-        function openPasswordModal() {
-            document.getElementById('admin-pass-input').value = '';
-            document.getElementById('pass-error-msg').classList.add('hidden');
-            document.getElementById('password-modal').classList.remove('hidden');
-        }
-
-        function closePasswordModal() {
-            document.getElementById('password-modal').classList.add('hidden');
+            [...globalAttendeesList].reverse().forEach(att => {
+                const row = document.createElement('tr');
+                row.className = "border-b border-slate-800/50 hover:bg-slate-800/30";
+                const isF2F = att.type === 'f2f' || att.type === 'Face-to-Face';
+                const badgeClass = isF2F ? 'bg-teal-950 text-teal-400' : 'bg-blue-950 text-blue-400';
+                
+                row.innerHTML = `
+                    <td class="py-2.5 px-2"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${isF2F ? 'F2F' : 'Online'}</span></td>
+                    <td class="py-2.5 px-2 font-semibold text-white">${att.fullName}</td>
+                    <td class="py-2.5 px-2 text-slate-400">${att.email}</td>
+                    <td class="py-2.5 px-2">${att.phone}</td>
+                    <td class="py-2.5 px-2 text-slate-400">${att.specialty}</td>
+                `;
+                tbody.appendChild(row);
+            });
         }
 
         function handlePasswordSubmit(event) {
             event.preventDefault();
-            const enteredPass = document.getElementById('admin-pass-input').value;
-            
-            if (enteredPass === 'asem2026') {
+            if (document.getElementById('admin-pass-input').value === 'asem2026') {
                 closePasswordModal();
-                toggleAdminPanel(true);
+                document.getElementById('admin-panel').classList.remove('hidden');
+                renderAdminTable();
+                document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
             } else {
                 document.getElementById('pass-error-msg').classList.remove('hidden');
             }
         }
 
-        function updateUI() {
-            const attendees = getAttendees();
-            const f2fAttendees = attendees.filter(a => a.type === 'f2f');
-            const onlineAttendees = attendees.filter(a => a.type === 'online');
-
-            const f2fCount = f2fAttendees.length;
-            const remaining = Math.max(0, CAPACITY_LIMIT - f2fCount);
-
-            const remainingSeatsBadge = document.getElementById('remaining-seats-badge');
-            remainingSeatsBadge.innerText = remaining;
-
-            const f2fBtn = document.getElementById('btn-f2f-select');
-            const f2fSoldoutMsg = document.getElementById('f2f-soldout-message');
-
-            if (f2fCount >= CAPACITY_LIMIT) {
-                f2fBtn.classList.add('hidden');
-                f2fSoldoutMsg.classList.remove('hidden');
-            } else {
-                f2fBtn.classList.remove('hidden');
-                f2fSoldoutMsg.classList.add('hidden');
-            }
-
-            document.getElementById('admin-f2f-count').innerText = `${f2fCount} / ${CAPACITY_LIMIT}`;
-            document.getElementById('admin-online-count').innerText = onlineAttendees.length;
-
-            const tbody = document.getElementById('admin-table-body');
-            tbody.innerHTML = '';
-            
-            if (attendees.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-500 italic">No registrations submitted yet.</td></tr>`;
-            } else {
-                [...attendees].reverse().forEach(att => {
-                    const row = document.createElement('tr');
-                    row.className = "border-b border-slate-800/50 hover:bg-slate-800/30";
-                    
-                    const badgeClass = att.type === 'f2f' ? 'bg-teal-950 text-teal-400' : 'bg-blue-950 text-blue-400';
-                    const badgeText = att.type === 'f2f' ? 'F2F' : 'Online';
-
-                    row.innerHTML = `
-                        <td class="py-2.5 px-2"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${badgeText}</span></td>
-                        <td class="py-2.5 px-2 font-semibold text-white">${att.fullName}</td>
-                        <td class="py-2.5 px-2 text-slate-400">${att.email}</td>
-                        <td class="py-2.5 px-2">${att.phone}</td>
-                        <td class="py-2.5 px-2 text-slate-400">${att.specialty}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            }
-        }
-
-        function saveKeys() {
-            const pubKey = document.getElementById('admin-public-key').value.trim();
-            const srvId = document.getElementById('admin-service-id').value.trim();
-            const tmpId = document.getElementById('admin-template-id').value.trim();
-
-            if (!pubKey || !srvId || !tmpId) {
-                alert("Please fill in all three keys to activate the connection.");
-                return;
-            }
-
-            localStorage.setItem('emailjs_public_key', pubKey);
-            localStorage.setItem('emailjs_service_id', srvId);
-            localStorage.setItem('emailjs_template_id', tmpId);
-
-            emailjs.init(pubKey);
-
-            const successMsg = document.getElementById('save-success-msg');
-            successMsg.classList.remove('hidden');
-            setTimeout(() => {
-                successMsg.classList.add('hidden');
-            }, 4000);
-        }
-
-        function toggleAdminPanel(forceOpen = false) {
-            const panel = document.getElementById('admin-panel');
-            if (forceOpen) {
-                panel.classList.remove('hidden');
-            } else {
-                panel.classList.toggle('hidden');
-            }
-            
-            if (!panel.classList.contains('hidden')) {
-                document.getElementById('admin-public-key').value = localStorage.getItem('emailjs_public_key') || savedPublicKey;
-                document.getElementById('admin-service-id').value = localStorage.getItem('emailjs_service_id') || savedServiceId;
-                document.getElementById('admin-template-id').value = localStorage.getItem('emailjs_template_id') || savedTemplateId;
-                panel.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function clearDatabase() {
-            if (confirm("Are you sure you want to clear all registrations? This cannot be undone.")) {
-                saveAttendees([]);
-            }
-        }
-
-        function downloadCSV() {
-            const attendees = getAttendees();
-            if (attendees.length === 0) {
-                alert("No registrations available to export.");
-                return;
-            }
-
-            let csvContent = "data:text/csv;charset=utf-8,Type,Full Name,Email,Phone,Specialty,Registration Date\n";
-            attendees.forEach(a => {
-                const row = `"${a.type}","${a.fullName}","${a.email}","${a.phone}","${a.specialty}","${a.date}"`;
-                csvContent += row + "\n";
-            });
-
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "Glaucoma_Event_Registrations.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function injectMockRecords() {
-            const list = getAttendees();
-            const names = [
-                "Dr. James Carter", "Dr. Emma Watson", "Dr. Sarah Jenkins", "Dr. Michael Ross", 
-                "Dr. Harvey Specter", "Dr. Louis Litt", "Dr. Donna Paulsen", "Dr. Robert Zane",
-                "Dr. Rachel Green", "Dr. Monica Geller", "Dr. Ross Geller", "Dr. Chandler Bing",
-                "Dr. Joey Tribbiani", "Dr. Phoebe Buffay", "Dr. Gregory House", "Dr. Lisa Cuddy",
-                "Dr. Eric Foreman", "Dr. Allison Cameron", "Dr. Robert Chase", "Dr. James Wilson",
-                "Dr. John Watson", "Dr. Sherlock Holmes", "Dr. Bruce Banner", "Dr. Tony Stark",
-                "Dr. Stephen Strange", "Dr. Peter Parker", "Dr. Steve Rogers", "Dr. Natasha Romanoff",
-                "Dr. Wanda Maximoff"
-            ];
-            
-            const currentF2fCount = list.filter(a => a.type === 'f2f').length;
-            const toInject = Math.max(0, 29 - currentF2fCount);
-
-            for (let i = 0; i < toInject; i++) {
-                list.push({
-                    type: 'f2f',
-                    fullName: names[i % names.length],
-                    email: `doctor.${i}@hospital.org`,
-                    phone: `+962 7912345${String(i).padStart(2, '0')}`,
-                    specialty: 'Ophthalmologist',
-                    date: new Date().toISOString()
-                });
-            }
-
-            saveAttendees(list);
-            alert(`Injected ${toInject} mock registrations. The F2F portal is now at ${list.filter(a => a.type === 'f2f').length}/30. Submit 1 more F2F form to test the email notification!`);
-        }
+        function openPasswordModal() { document.getElementById('password-modal').classList.remove('hidden'); }
+        function closePasswordModal() { document.getElementById('password-modal').classList.add('hidden'); }
+        function goBack() { formView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); }
+        function goHome() { successView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); }
 
         window.onload = function() {
-            updateUI();
+            fetchCloudData();
         };
     </script>
 </body>
