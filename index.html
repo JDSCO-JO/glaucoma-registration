@@ -65,14 +65,6 @@
         </div>
     </header>
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-950/50 z-50 flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white p-5 rounded-2xl shadow-xl flex items-center gap-3">
-            <i class="fa-solid fa-spinner animate-spin text-teal-600 text-2xl"></i>
-            <span class="font-semibold text-sm text-slate-700">Connecting to cloud secure server...</span>
-        </div>
-    </div>
-
     <!-- Main Dynamic Content Area -->
     <main class="max-w-4xl w-full mx-auto px-4 py-6 md:py-10 flex-grow">
         
@@ -263,26 +255,23 @@
             </div>
         </div>
 
-        <!-- ADMIN DASHBOARD PANEL - Cloud Realtime Table -->
+        <!-- ADMIN DASHBOARD PANEL - Local Device Storage Table -->
         <div id="admin-panel" class="hidden mt-8 bg-slate-900 text-slate-100 rounded-2xl p-4 sm:p-6 border border-slate-800 shadow-xl">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
                 <div>
-                    <h3 class="text-lg font-bold text-teal-400">Global Admin Dashboard (Cloud Database)</h3>
-                    <p class="text-slate-400 text-xs mt-0.5">Showing live records combined from all devices.</p>
+                    <h3 class="text-lg font-bold text-teal-400">Local Admin Dashboard (This Device Only)</h3>
+                    <p class="text-slate-400 text-xs mt-0.5">Showing records submitted on this browser.</p>
                 </div>
-                <button onclick="fetchCloudData()" class="bg-teal-600 hover:bg-teal-700 text-white text-xs px-3 py-2 rounded-lg font-semibold transition-all">
-                    <i class="fa-solid fa-rotate"></i> Refresh Cloud Data
-                </button>
             </div>
 
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                    <div class="text-slate-400 text-xs">Total F2F Registered (All Phones)</div>
+                    <div class="text-slate-400 text-xs">F2F Registered (Local)</div>
                     <div class="text-2xl font-bold text-white mt-1" id="admin-f2f-count">0 / 30</div>
                 </div>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                    <div class="text-slate-400 text-xs">Total Online Registered (All Phones)</div>
+                    <div class="text-slate-400 text-xs">Online Registered (Local)</div>
                     <div class="text-2xl font-bold text-white mt-1" id="admin-online-count">0</div>
                 </div>
             </div>
@@ -300,7 +289,6 @@
                         </tr>
                     </thead>
                     <tbody id="admin-table-body" class="divide-y divide-slate-800 text-slate-300">
-                        <tr><td colspan="5" class="py-4 text-center text-slate-500 italic">Enter password to load cloud records...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -321,13 +309,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script>
-        // السيرفر السحابي الجاهز والمفعل الآن لجمع كافة المدخلات مركزياً فوراً
-        const CLOUD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzL5T1rG_g7FzCszP3T1-eD2V6yKqU2kX_rYq62Q7jC_6Y_73k/exec";
+        const CAPACITY_LIMIT = 30; //
         
-        const CAPACITY_LIMIT = 30;
-        let globalAttendeesList = [];
-        let globalF2FCount = 0;
-
         const savedPublicKey = "yCaH2C-1PrWSlLD8d";
         const savedServiceId = "service_efmfuyn";
         const savedTemplateId = "template_hbq4mgk";
@@ -337,38 +320,32 @@
         const formView = document.getElementById('form-view');
         const successView = document.getElementById('success-view');
         const regForm = document.getElementById('reg-form');
-        const loadingOverlay = document.getElementById('loading-overlay');
 
-        async function fetchCloudData() {
-            try {
-                const response = await fetch(CLOUD_SCRIPT_URL);
-                const data = await response.json();
-                globalAttendeesList = data;
-                
-                globalF2FCount = data.filter(a => a.type === 'f2f' || a.type === 'Face-to-Face').length;
-                const onlineCount = data.filter(a => a.type === 'online' || a.type === 'Online').length;
-                
-                const remaining = Math.max(0, CAPACITY_LIMIT - globalF2FCount);
-                document.getElementById('remaining-seats-badge').innerText = remaining;
+        function getLocalAttendees() {
+            return JSON.parse(localStorage.getItem('glaucoma_attendees')) || [];
+        }
 
-                if (globalF2FCount >= CAPACITY_LIMIT) {
-                    document.getElementById('btn-f2f-select').classList.add('hidden');
-                    document.getElementById('f2f-soldout-message').classList.remove('hidden');
-                } else {
-                    document.getElementById('btn-f2f-select').classList.remove('hidden');
-                    document.getElementById('f2f-soldout-message').classList.add('hidden');
-                }
+        function updateRemainingSeats() {
+            const attendees = getLocalAttendees();
+            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
+            const remaining = Math.max(0, CAPACITY_LIMIT - f2fCount);
+            
+            document.getElementById('remaining-seats-badge').innerText = remaining;
 
-                document.getElementById('admin-f2f-count').innerText = `${globalF2FCount} / ${CAPACITY_LIMIT}`;
-                document.getElementById('admin-online-count').innerText = onlineCount;
-                renderAdminTable();
-            } catch (err) {
-                console.error("Error connecting to database: ", err);
+            if (f2fCount >= CAPACITY_LIMIT) {
+                document.getElementById('btn-f2f-select').classList.add('hidden');
+                document.getElementById('f2f-soldout-message').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-f2f-select').classList.remove('hidden');
+                document.getElementById('f2f-soldout-message').classList.add('hidden');
             }
         }
 
         function openRegistration(type) {
-            if (type === 'f2f' && globalF2FCount >= CAPACITY_LIMIT) {
+            const attendees = getLocalAttendees();
+            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
+
+            if (type === 'f2f' && f2fCount >= CAPACITY_LIMIT) {
                 alert("Sorry! This in-person session is fully booked.");
                 return;
             }
@@ -390,9 +367,8 @@
             formView.classList.remove('hidden');
         }
 
-        async function submitForm(event) {
+        function submitForm(event) {
             event.preventDefault();
-            loadingOverlay.classList.remove('hidden');
 
             const type = document.getElementById('input-type').value;
             const fullName = document.getElementById('fullName').value.trim();
@@ -400,66 +376,63 @@
             const phone = document.getElementById('phone').value.trim();
             const specialty = document.getElementById('specialty').value;
 
-            try {
-                const formData = new FormData();
-                formData.append('type', type);
-                formData.append('fullName', fullName);
-                formData.append('email', email);
-                formData.append('phone', phone);
-                formData.append('specialty', specialty);
+            const attendees = getLocalAttendees();
+            
+            const newAttendee = { type, fullName, email, phone, specialty, timestamp: new Date().toISOString() };
+            attendees.push(newAttendee);
+            localStorage.setItem('glaucoma_attendees', JSON.stringify(attendees));
 
-                await fetch(CLOUD_SCRIPT_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                await fetchCloudData();
+            updateRemainingSeats();
+            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
 
-                if (type === 'f2f' && globalF2FCount === CAPACITY_LIMIT) {
-                    const emailParams = {
-                        attendee_name: fullName,
-                        attendee_email: email,
-                        attendee_phone: phone,
-                        attendee_specialty: specialty,
-                        registration_type: 'Face-to-Face (Hotel) - CAPACITY REACHED',
-                        f2f_count: globalF2FCount
-                    };
-                    await emailjs.send(savedServiceId, savedTemplateId, emailParams);
-                }
-
-                const successMsg = document.getElementById('success-message');
-                const onlineBox = document.getElementById('online-meeting-box');
-                
-                if (type === 'f2f') {
-                    successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! You have successfully booked a live seat at the <strong>Sheraton Hotel</strong>.`;
-                    onlineBox.classList.add('hidden');
-                } else {
-                    successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! Registered for the digital broadcast successfully.`;
-                    onlineBox.classList.remove('hidden');
-                }
-
-                formView.classList.add('hidden');
-                successView.classList.remove('hidden');
-
-            } catch (error) {
-                alert("Database submission failed. Please try again.");
-                console.error(error);
-            } finally {
-                loadingOverlay.classList.add('hidden');
+            if (type === 'f2f' && f2fCount === CAPACITY_LIMIT) {
+                const emailParams = {
+                    attendee_name: fullName,
+                    attendee_email: email,
+                    attendee_phone: phone,
+                    attendee_specialty: specialty,
+                    registration_type: 'Face-to-Face (Hotel) - CAPACITY REACHED',
+                    f2f_count: f2fCount
+                };
+                emailjs.send(savedServiceId, savedTemplateId, emailParams)
+                    .catch(err => console.error("Alert email failed: ", err));
             }
+
+            const successMsg = document.getElementById('success-message');
+            const onlineBox = document.getElementById('online-meeting-box');
+            
+            if (type === 'f2f') {
+                successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! You have successfully booked a live seat at the <strong>Sheraton Hotel</strong>.`;
+                onlineBox.classList.add('hidden');
+            } else {
+                successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! Registered for the digital broadcast successfully.`;
+                onlineBox.classList.remove('hidden');
+            }
+
+            formView.classList.add('hidden');
+            successView.classList.remove('hidden');
         }
 
         function renderAdminTable() {
+            const attendees = getLocalAttendees();
+            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
+            const onlineCount = attendees.filter(a => a.type === 'online').length;
+
+            document.getElementById('admin-f2f-count').innerText = `${f2fCount} / ${CAPACITY_LIMIT}`;
+            document.getElementById('admin-online-count').innerText = onlineCount;
+
             const tbody = document.getElementById('admin-table-body');
             tbody.innerHTML = '';
-            if (globalAttendeesList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-500 italic">No registrations found in the cloud database.</td></tr>`;
+            
+            if (attendees.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-500 italic">No registrations found on this device.</td></tr>`;
                 return;
             }
-            [...globalAttendeesList].reverse().forEach(att => {
+
+            [...attendees].reverse().forEach(att => {
                 const row = document.createElement('tr');
                 row.className = "border-b border-slate-800/50 hover:bg-slate-800/30";
-                const isF2F = att.type === 'f2f' || att.type === 'Face-to-Face';
+                const isF2F = att.type === 'f2f';
                 const badgeClass = isF2F ? 'bg-teal-950 text-teal-400' : 'bg-blue-950 text-blue-400';
                 
                 row.innerHTML = `
@@ -491,7 +464,7 @@
         function goHome() { successView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); }
 
         window.onload = function() {
-            fetchCloudData();
+            updateRemainingSeats();
         };
     </script>
 </body>
