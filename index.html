@@ -1,474 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration: Approach to Patients with Glaucoma</title>
-    <!-- Tailwind CSS for modern premium design -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Approach to Patients with Glaucoma - Registration</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #0f766e 100%);
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 0;
+            border-bottom: 5px solid #00d2ff;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: white;
+        }
+        .btn-choice {
+            padding: 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .counter-badge {
+            font-size: 0.9rem;
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col justify-between overflow-x-hidden">
+<body>
 
-    <!-- Top Banner / Event Header -->
-    <header class="gradient-bg text-white py-8 md:py-12 px-4 md:px-6 text-center relative overflow-hidden shadow-lg">
-        <div class="absolute inset-0 opacity-10">
-            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-                <defs>
-                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-        </div>
-        
-        <div class="max-w-4xl mx-auto relative z-10 px-2">
-            <span class="inline-block bg-teal-500/20 text-teal-300 border border-teal-500/30 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider mb-3">Scientific Medical Seminar</span>
-            <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold mt-2 mb-3 tracking-tight leading-tight">Approach to Patients with Glaucoma</h1>
-            <p class="text-teal-200 text-sm sm:text-base md:text-xl font-medium mb-6 max-w-2xl mx-auto">Expert clinical guidance on diagnosis, monitoring, and management.</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-xs sm:text-sm bg-slate-900/40 p-4 rounded-xl backdrop-blur-sm text-left sm:text-center">
-                <div class="flex items-center sm:justify-center gap-2.5">
-                    <i class="fa-solid fa-user-doctor text-teal-400 text-base flex-shrink-0"></i>
-                    <span><strong>Presenter:</strong> Dr. Wisam Shihadeh</span>
-                </div>
-                <div class="flex items-center sm:justify-center gap-2.5 border-t sm:border-t-0 sm:border-x border-slate-700/60 pt-2 sm:pt-0 pb-1 sm:pb-0">
-                    <i class="fa-solid fa-calendar-day text-teal-400 text-base flex-shrink-0"></i>
-                    <span>Sunday, 14 June 2026</span>
-                </div>
-                <div class="flex items-center sm:justify-center gap-2.5 border-t sm:border-t-0 border-slate-700/60 pt-2 sm:pt-0">
-                    <i class="fa-solid fa-clock text-teal-400 text-base flex-shrink-0"></i>
-                    <span>07:00 PM (Local Time)</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-950/50 z-50 flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white p-5 rounded-2xl shadow-xl flex items-center gap-3">
-            <i class="fa-solid fa-spinner animate-spin text-teal-600 text-2xl"></i>
-            <span class="font-semibold text-sm text-slate-700">Submitting securely to cloud database...</span>
+    <div class="hero-section text-center">
+        <div class="container">
+            <h1 class="fw-bold mb-2">Approach to Patients with Glaucoma</h1>
+            <p class="lead mb-0">الندوة العلمية المتخصصة لأطباء العيون والمهتمين</p>
         </div>
     </div>
 
-    <!-- Main Dynamic Content Area -->
-    <main class="max-w-4xl w-full mx-auto px-4 py-6 md:py-10 flex-grow">
-        
-        <!-- Portal Selection View -->
-        <div id="selection-view" class="space-y-6 md:space-y-8">
-            <h2 class="text-xl sm:text-2xl font-bold text-center text-slate-900">Choose Your Attendance Type</h2>
-            <p class="text-center text-slate-500 text-sm -mt-4">Please select whether you wish to attend in-person or join us virtually online.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
                 
-                <!-- Card 1: Face to Face -->
-                <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-teal-600 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 bg-teal-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl tracking-wide">LIMITED SEATS</div>
-                    <div class="mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-700 text-xl mb-4">
-                            <i class="fa-solid fa-hospital-user"></i>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">Face-to-Face Attendance</h3>
-                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Attend live at the hotel conference hall, network with peers, and participate in physical interactive Q&A sessions.</p>
+                <!-- خطوة اختيار نوع الحضور -->
+                <div id="step-1" class="card card-custom p-4 text-center mb-4">
+                    <h3 class="fw-bold mb-4 text-secondary">الرجاء اختيار طريقة الحضور المفضلة:</h3>
+                    <div class="d-grid gap-3">
+                        <button type="button" class="btn btn-outline-primary btn-choice position-relative" onclick="selectType('f2f')">
+                            📍 حضور وجاهي (Face to Face)
+                            <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger counter-badge" id="f2f-badge" style="display:none;"></span>
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-choice position-relative" onclick="selectType('online')">
+                            💻 حضور افتراضي (Online)
+                            <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger counter-badge" id="online-badge" style="display:none;"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- خطوة استمارة البيانات -->
+                <div id="step-2" class="card card-custom p-4" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fw-bold m-0 text-primary" id="form-title">إكمال بيانات التسجيل</h3>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="goBack()">تغيير نوع الحضور</button>
+                    </div>
+
+                    <!-- iframe مخفي لمنع إعادة التوجيه لصفحة جوجل بعد الإرسال -->
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { window.location.href='thanks.html'; }"></iframe>
+
+                    <!-- نموذج الإرسال المرتبط بـ Google Form الخاص بك مباشرة -->
+                    <form id="reg-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfT_aKT8RePcFatm9uYUBJ5F-RQhD-bBV8u7oHvThCrokYO2g/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
                         
-                        <div class="space-y-2.5">
-                            <div class="flex items-center gap-3 text-sm text-slate-600">
-                                <i class="fa-solid fa-location-dot text-teal-600 w-5 flex-shrink-0"></i>
-                                <span>Sheraton Hotel</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-sm text-slate-600">
-                                <i class="fa-solid fa-chair text-teal-600 w-5 flex-shrink-0"></i>
-                                <span>Remaining Seats: <strong id="remaining-seats-badge" class="text-teal-700">--</strong> / 30</span>
-                            </div>
+                        <!-- الحقول السحرية المربوطة بـ Google Form -->
+                        <input type="hidden" id="input-type" name="entry.298455297">
+
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">الاسم الكامل (باللغة الإنجليزية للشهادة) *</label>
+                            <input type="text" name="entry.1407695842" id="fullName" class="form-control" required placeholder="Dr. First Last">
                         </div>
-                    </div>
-                    <button onclick="openRegistration('f2f')" id="btn-f2f-select" class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3.5 px-4 rounded-xl font-semibold transition-all shadow-sm active:scale-95">
-                        Register In-Person
-                    </button>
-                    <div id="f2f-soldout-message" class="hidden text-center text-rose-600 font-bold text-sm bg-rose-50 border border-rose-100 py-3.5 rounded-xl">
-                        <i class="fa-solid fa-circle-xmark mr-1"></i> Registration Closed (30 Seats Filled)
-                    </div>
-                </div>
 
-                <!-- Card 2: Online -->
-                <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-blue-600 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl tracking-wide">UNLIMITED PATH</div>
-                    <div class="mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 text-xl mb-4">
-                            <i class="fa-solid fa-laptop-medical"></i>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">البريد الإلكتروني *</label>
+                            <input type="email" name="entry.1695785341" id="email" class="form-control" required placeholder="name@example.com">
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">Online Stream</h3>
-                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Join us virtually from anywhere via live interactive broadcast on Microsoft Teams with live Q&A feed.</p>
-                        
-                        <div class="space-y-2.5">
-                            <div class="flex items-center gap-3 text-sm text-slate-600">
-                                <i class="fa-brands fa-microsoft-teams text-blue-600 w-5 flex-shrink-0"></i>
-                                <span class="truncate">Microsoft Teams Meeting</span>
-                            </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">رقم الهاتف / الواتساب *</label>
+                            <input type="tel" name="entry.440707602" id="phone" class="form-control" required placeholder="07XXXXXXXX">
                         </div>
-                    </div>
-                    <button onclick="openRegistration('online')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-xl font-semibold transition-all shadow-sm active:scale-95">
-                        Register Online Link
-                    </button>
+
+                        <div class="mb-3">
+                            <label for="specialty" class="form-label">التخصص الطبي *</label>
+                            <select name="entry.1644307014" id="specialty" class="form-select" required>
+                                <option value="" disabled selected>اختر التخصص...</option>
+                                <option value="Ophthalmologist">طبيب عيون (Ophthalmologist)</option>
+                                <option value="Ophthalmology Resident">مقيم عيون (Ophthalmology Resident)</option>
+                                <option value="Optometrist">فاحص بصر / اختصاصي بصريات (Optometrist)</option>
+                                <option value="General Practitioner / Family Medicine">طبيب أسرة / طبيب عام</option>
+                                <option value="Other Medical Specialty">تخصص طبي آخر</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fs-5 fw-bold" id="submitBtn">تأكيد حجز المقعد والتسجيل</button>
+                    </form>
                 </div>
 
             </div>
         </div>
-
-        <!-- Registration Form View -->
-        <div id="form-view" class="hidden max-w-lg mx-auto bg-white border border-slate-200 rounded-2xl shadow-md p-5 sm:p-8">
-            <button onclick="goBack()" class="text-slate-400 hover:text-slate-600 mb-5 flex items-center gap-2 text-sm font-medium py-1">
-                <i class="fa-solid fa-arrow-left"></i> Back to options
-            </button>
-            
-            <div class="mb-6">
-                <span id="form-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wide"></span>
-                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">Registration Form</h3>
-                <p id="form-subtext" class="text-slate-500 text-xs sm:text-sm mt-1"></p>
-            </div>
-
-            <!-- Hidden Iframe to catch Google Form redirect without breaking the page -->
-            <iframe name="hidden_iframe" id="hidden_iframe" class="hidden" onload="if(submitted) { showSuccessPage(); }"></iframe>
-
-            <!-- Direct Dynamic Linkage to Your Google Form -->
-            <form id="reg-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfT_aKT8RePcFatm9uYUBJ5F-RQhD-bBV8u7oHvThCrokYO2g/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true; saveLocalRecord(); document.getElementById('loading-overlay').classList.remove('hidden');" class="space-y-5">
-                
-                <!-- Mapping Form Entries -->
-                <input type="hidden" id="input-type" name="entry.1818167389">
-                
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="fullName">Full Name (English) *</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-                            <i class="fa-solid fa-user text-sm"></i>
-                        </span>
-                        <input type="text" name="entry.58882500" id="fullName" required placeholder="Dr. John Doe" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="email">Email Address *</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-                            <i class="fa-solid fa-envelope text-sm"></i>
-                        </span>
-                        <input type="email" name="entry.286991971" id="email" required placeholder="doctor@example.com" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="phone">Phone / WhatsApp *</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-                            <i class="fa-solid fa-phone text-sm"></i>
-                        </span>
-                        <input type="tel" name="entry.198335017" id="phone" required placeholder="+962 700000000" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="specialty">Medical Specialty *</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-                            <i class="fa-solid fa-stethoscope text-sm"></i>
-                        </span>
-                        <select name="entry.454238515" id="specialty" required class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all appearance-none text-sm">
-                            <option value="" disabled selected>Select your specialty</option>
-                            <option value="Ophthalmologist">Ophthalmologist</option>
-                            <option value="Optometrist">Optometrist</option>
-                            <option value="General Practitioner">General Practitioner</option>
-                            <option value="Resident Physician">Resident Physician</option>
-                            <option value="Medical Student">Medical Student</option>
-                            <option value="Other">Other Specialty</option>
-                        </select>
-                        <span class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full mt-2 bg-teal-600 hover:bg-teal-700 text-white py-3.5 rounded-xl font-semibold shadow-md transition-all active:scale-95">
-                    Submit Registration
-                </button>
-            </form>
-        </div>
-
-        <!-- Success Screen -->
-        <div id="success-view" class="hidden max-w-md mx-auto bg-white border border-slate-200 rounded-2xl shadow-md p-6 sm:p-8 text-center">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Registration Successful!</h3>
-            <p id="success-message" class="text-slate-500 text-sm mb-6 leading-relaxed"></p>
-
-            <div id="online-meeting-box" class="hidden bg-blue-50 border border-blue-100 p-4 sm:p-5 rounded-xl text-left mb-6">
-                <h4 class="font-bold text-blue-950 text-sm flex items-center gap-2 mb-2">
-                    <i class="fa-brands fa-microsoft-teams text-blue-600 text-lg"></i>
-                    Your Microsoft Teams Access Link
-                </h4>
-                <p class="text-xs text-blue-900/80 mb-4">Please bookmark this URL or click below to join the virtual conference tonight at 07:00 PM.</p>
-                
-                <a href="https://teams.microsoft.com/l/meetup-join/mock-link-glaucoma-seminar" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-3.5 rounded-xl font-semibold transition-all text-center leading-relaxed shadow-sm active:scale-95">
-                    <span class="block text-[11px] font-bold uppercase tracking-wider mb-1">Click to Join Meeting</span>
-                    <span class="block text-[10px] opacity-90 italic">Approach to patients with glaucoma by Prof. Wisam Shehadeh | Microsoft Teams</span>
-                </a>
-            </div>
-
-            <button onclick="goHome()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-sm font-semibold transition-all">
-                Close & Return
-            </button>
-        </div>
-
-        <!-- Security Password Modal UI -->
-        <div id="password-modal" class="hidden fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center px-4 backdrop-blur-sm">
-            <div class="bg-white max-w-sm w-full rounded-2xl shadow-2xl p-6 border border-slate-100 text-center relative">
-                <button onclick="closePasswordModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-                <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center text-xl mx-auto mb-4">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <h4 class="text-lg font-bold text-slate-900 mb-1">Admin Authorization</h4>
-                <p class="text-slate-500 text-xs mb-5">Please enter the security password to unlock settings.</p>
-                
-                <form onsubmit="handlePasswordSubmit(event)" class="space-y-4">
-                    <input type="password" id="admin-pass-input" placeholder="••••••••" required class="w-full text-center tracking-widest px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
-                    <div id="pass-error-msg" class="hidden text-rose-600 text-xs font-medium">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Incorrect password!
-                    </div>
-                    <button type="submit" class="w-full bg-slate-900 hover:bg-slate-950 text-white py-3 rounded-xl text-xs font-semibold shadow transition-all">
-                        Unlock Dashboard
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <!-- ADMIN DASHBOARD PANEL - Local Device Storage Table -->
-        <div id="admin-panel" class="hidden mt-8 bg-slate-900 text-slate-100 rounded-2xl p-4 sm:p-6 border border-slate-800 shadow-xl">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
-                <div>
-                    <h3 class="text-lg font-bold text-teal-400">Admin Dashboard (Registered on this phone)</h3>
-                    <p class="text-slate-400 text-xs mt-0.5">Showing records submitted locally.</p>
-                </div>
-                <button onclick="clearLocalCache()" class="bg-rose-950 hover:bg-rose-900 border border-rose-800/60 text-rose-400 px-3 py-1.5 rounded-xl text-xs font-medium transition-all">
-                    Reset Counter
-                </button>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                    <div class="text-slate-400 text-xs">F2F Registered (Local)</div>
-                    <div class="text-2xl font-bold text-white mt-1" id="admin-f2f-count">0 / 30</div>
-                </div>
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                    <div class="text-slate-400 text-xs">Online Registered (Local)</div>
-                    <div class="text-2xl font-bold text-white mt-1" id="admin-online-count">0</div>
-                </div>
-            </div>
-
-            <!-- Scrollable Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs min-w-[500px]">
-                    <thead>
-                        <tr class="border-b border-slate-800 text-slate-400">
-                            <th class="py-3 px-2">Type</th>
-                            <th class="py-3 px-2">Name</th>
-                            <th class="py-3 px-2">Email</th>
-                            <th class="py-3 px-2">Phone</th>
-                            <th class="py-3 px-2">Specialty</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-table-body" class="divide-y divide-slate-800 text-slate-300">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-6 px-4 text-center">
-        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-            <p id="secret-trigger" ondblclick="openPasswordModal()" class="cursor-default select-none hover:text-slate-600 transition-colors py-2 w-full text-center">
-                © 2026 Scientific Seminars. All rights reserved. (Double click for Admin)
-            </p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        const CAPACITY_LIMIT = 30;
         let submitted = false;
 
-        const selectionView = document.getElementById('selection-view');
-        const formView = document.getElementById('form-view');
-        const successView = document.getElementById('success-view');
-        const regForm = document.getElementById('reg-form');
-        const loadingOverlay = document.getElementById('loading-overlay');
-
-        function getLocalAttendees() {
-            return JSON.parse(localStorage.getItem('glaucoma_attendees')) || [];
+        // دالة اختيار نوع الحضور
+        function selectType(type) {
+            document.getElementById('input-type').value = type === 'f2f' ? 'Face to Face' : 'Online';
+            document.getElementById('form-title').innerText = type === 'f2f' ? 'التسجيل للحضور الوجاهي 📍' : 'التسجيل للحضور الافتراضي 💻';
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
         }
 
-        function updateRemainingSeats() {
-            const attendees = getLocalAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'Face-to-Face' || a.type === 'f2f').length;
-            const remaining = Math.max(0, CAPACITY_LIMIT - f2fCount);
-            
-            document.getElementById('remaining-seats-badge').innerText = remaining;
-
-            if (f2fCount >= CAPACITY_LIMIT) {
-                document.getElementById('btn-f2f-select').classList.add('hidden');
-                document.getElementById('f2f-soldout-message').classList.remove('hidden');
-            } else {
-                document.getElementById('btn-f2f-select').classList.remove('hidden');
-                document.getElementById('f2f-soldout-message').classList.add('hidden');
-            }
+        // دالة العودة للخطوة السابقة
+        function goBack() {
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-1').style.display = 'block';
         }
-
-        function openRegistration(type) {
-            const attendees = getLocalAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'Face-to-Face' || a.type === 'f2f').length;
-
-            if (type === 'f2f' && f2fCount >= CAPACITY_LIMIT) {
-                alert("Sorry! This in-person session is fully booked.");
-                return;
-            }
-
-            document.getElementById('input-type').value = type === 'f2f' ? 'Face-to-Face' : 'Online';
-            const badge = document.getElementById('form-badge');
-            const subtext = document.getElementById('form-subtext');
-
-            if (type === 'f2f') {
-                badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-teal-100 text-teal-800";
-                badge.innerText = "In-Person (Hotel Venue)";
-                subtext.innerHTML = 'Venue: Sheraton Hotel at 07:00 PM';
-            } else {
-                badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-blue-100 text-blue-800";
-                badge.innerText = "Online Session";
-                subtext.innerHTML = 'Venue: Microsoft Teams Stream at 07:00 PM';
-            }
-
-            selectionView.classList.add('hidden');
-            formView.classList.remove('hidden');
-        }
-
-        function saveLocalRecord() {
-            const type = document.getElementById('input-type').value;
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const specialty = document.getElementById('specialty').value;
-
-            const attendees = getLocalAttendees();
-            const newAttendee = { type, fullName, email, phone, specialty, timestamp: new Date().toISOString() };
-            attendees.push(newAttendee);
-            localStorage.setItem('glaucoma_attendees', JSON.stringify(attendees));
-        }
-
-        function showSuccessPage() {
-            loadingOverlay.classList.add('hidden');
-            updateRemainingSeats();
-            
-            const type = document.getElementById('input-type').value;
-            const fullName = document.getElementById('fullName').value.trim();
-            const successMsg = document.getElementById('success-message');
-            const onlineBox = document.getElementById('online-meeting-box');
-            
-            if (type === 'Face-to-Face') {
-                successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! You have successfully booked a live seat at the <strong>Sheraton Hotel</strong>.`;
-                onlineBox.classList.add('hidden');
-            } else {
-                successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! Registered for the digital broadcast successfully.`;
-                onlineBox.classList.remove('hidden');
-            }
-
-            formView.classList.add('hidden');
-            successView.classList.remove('hidden');
-            
-            if(!document.getElementById('admin-panel').classList.contains('hidden')) {
-                renderAdminTable();
-            }
-        }
-
-        function renderAdminTable() {
-            const attendees = getLocalAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'Face-to-Face' || a.type === 'f2f').length;
-            const onlineCount = attendees.filter(a => a.type === 'Online' || a.type === 'online').length;
-
-            document.getElementById('admin-f2f-count').innerText = `${f2fCount} / ${CAPACITY_LIMIT}`;
-            document.getElementById('admin-online-count').innerText = onlineCount;
-
-            const tbody = document.getElementById('admin-table-body');
-            tbody.innerHTML = '';
-            
-            if (attendees.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-500 italic">No registrations found on this device.</td></tr>`;
-                return;
-            }
-
-            [...attendees].reverse().forEach(att => {
-                const row = document.createElement('tr');
-                row.className = "border-b border-slate-800/50 hover:bg-slate-800/30";
-                const isF2F = att.type === 'Face-to-Face' || att.type === 'f2f';
-                const badgeClass = isF2F ? 'bg-teal-950 text-teal-400' : 'bg-blue-950 text-blue-400';
-                
-                row.innerHTML = `
-                    <td class="py-2.5 px-2"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${isF2F ? 'F2F' : 'Online'}</span></td>
-                    <td class="py-2.5 px-2 font-semibold text-white">${att.fullName}</td>
-                    <td class="py-2.5 px-2 text-slate-400">${att.email}</td>
-                    <td class="py-2.5 px-2">${att.phone}</td>
-                    <td class="py-2.5 px-2 text-slate-400">${att.specialty}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function handlePasswordSubmit(event) {
-            event.preventDefault();
-            if (document.getElementById('admin-pass-input').value === 'asem2026') {
-                closePasswordModal();
-                document.getElementById('admin-panel').classList.remove('hidden');
-                renderAdminTable();
-                document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                document.getElementById('pass-error-msg').classList.remove('hidden');
-            }
-        }
-
-        function clearLocalCache() {
-            if(confirm("Are you sure you want to clear the local counter for this device?")) {
-                localStorage.removeItem('glaucoma_attendees');
-                updateRemainingSeats();
-                renderAdminTable();
-            }
-        }
-
-        function openPasswordModal() { document.getElementById('password-modal').classList.remove('hidden'); }
-        function closePasswordModal() { document.getElementById('password-modal').classList.add('hidden'); }
-        function goBack() { formView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); submitted = false; }
-        function goHome() { successView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); submitted = false; }
-
-        window.onload = function() {
-            updateRemainingSeats();
-        };
     </script>
 </body>
 </html>
