@@ -21,11 +21,6 @@
         .gradient-bg {
             background: linear-gradient(135deg, #0f172a 0%, #0f766e 100%);
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col justify-between overflow-x-hidden">
@@ -64,6 +59,14 @@
             </div>
         </div>
     </header>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-950/50 z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-5 rounded-2xl shadow-xl flex items-center gap-3">
+            <i class="fa-solid fa-spinner animate-spin text-teal-600 text-2xl"></i>
+            <span class="font-semibold text-sm text-slate-700">Submitting securely to cloud database...</span>
+        </div>
+    </div>
 
     <!-- Main Dynamic Content Area -->
     <main class="max-w-4xl w-full mx-auto px-4 py-6 md:py-10 flex-grow">
@@ -119,10 +122,6 @@
                                 <i class="fa-brands fa-microsoft-teams text-blue-600 w-5 flex-shrink-0"></i>
                                 <span class="truncate">Microsoft Teams Meeting</span>
                             </div>
-                            <div class="flex items-center gap-3 text-sm text-slate-600">
-                                <i class="fa-solid fa-users text-blue-600 w-5 flex-shrink-0"></i>
-                                <span>Unlimited capacity available</span>
-                            </div>
                         </div>
                     </div>
                     <button onclick="openRegistration('online')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-xl font-semibold transition-all shadow-sm active:scale-95">
@@ -145,8 +144,14 @@
                 <p id="form-subtext" class="text-slate-500 text-xs sm:text-sm mt-1"></p>
             </div>
 
-            <form id="reg-form" onsubmit="submitForm(event)" class="space-y-5">
-                <input type="hidden" id="input-type" name="type">
+            <!-- Hidden Iframe to catch Google Form redirect without breaking the page -->
+            <iframe name="hidden_iframe" id="hidden_iframe" class="hidden" onload="if(submitted) { showSuccessPage(); }"></iframe>
+
+            <!-- Direct Dynamic Linkage to Your Google Form -->
+            <form id="reg-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfT_aKT8RePcFatm9uYUBJ5F-RQhD-bBV8u7oHvThCrokYO2g/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true; saveLocalRecord(); document.getElementById('loading-overlay').classList.remove('hidden');" class="space-y-5">
+                
+                <!-- Mapping Form Entries -->
+                <input type="hidden" id="input-type" name="entry.1818167389">
                 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="fullName">Full Name (English) *</label>
@@ -154,7 +159,7 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                             <i class="fa-solid fa-user text-sm"></i>
                         </span>
-                        <input type="text" id="fullName" required placeholder="Dr. John Doe" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
+                        <input type="text" name="entry.58882500" id="fullName" required placeholder="Dr. John Doe" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
                     </div>
                 </div>
 
@@ -164,7 +169,7 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                             <i class="fa-solid fa-envelope text-sm"></i>
                         </span>
-                        <input type="email" id="email" required placeholder="doctor@example.com" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
+                        <input type="email" name="entry.286991971" id="email" required placeholder="doctor@example.com" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
                     </div>
                 </div>
 
@@ -174,7 +179,7 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                             <i class="fa-solid fa-phone text-sm"></i>
                         </span>
-                        <input type="tel" id="phone" required placeholder="+962 700000000" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
+                        <input type="tel" name="entry.198335017" id="phone" required placeholder="+962 700000000" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all text-sm">
                     </div>
                 </div>
 
@@ -184,7 +189,7 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                             <i class="fa-solid fa-stethoscope text-sm"></i>
                         </span>
-                        <select id="specialty" required class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all appearance-none text-sm">
+                        <select name="entry.454238515" id="specialty" required class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all appearance-none text-sm">
                             <option value="" disabled selected>Select your specialty</option>
                             <option value="Ophthalmologist">Ophthalmologist</option>
                             <option value="Optometrist">Optometrist</option>
@@ -199,7 +204,7 @@
                     </div>
                 </div>
 
-                <button type="submit" id="btn-submit" class="w-full mt-2 bg-teal-600 hover:bg-teal-700 text-white py-3.5 rounded-xl font-semibold shadow-md transition-all active:scale-95">
+                <button type="submit" class="w-full mt-2 bg-teal-600 hover:bg-teal-700 text-white py-3.5 rounded-xl font-semibold shadow-md transition-all active:scale-95">
                     Submit Registration
                 </button>
             </form>
@@ -218,7 +223,7 @@
                     <i class="fa-brands fa-microsoft-teams text-blue-600 text-lg"></i>
                     Your Microsoft Teams Access Link
                 </h4>
-                <p class="text-xs text-blue-900/80 mb-4">Please bookmark this URL or click below to join the virtual conference on Sunday, 14 June 2026 at 07:00 PM.</p>
+                <p class="text-xs text-blue-900/80 mb-4">Please bookmark this URL or click below to join the virtual conference tonight at 07:00 PM.</p>
                 
                 <a href="https://teams.microsoft.com/l/meetup-join/mock-link-glaucoma-seminar" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-3.5 rounded-xl font-semibold transition-all text-center leading-relaxed shadow-sm active:scale-95">
                     <span class="block text-[11px] font-bold uppercase tracking-wider mb-1">Click to Join Meeting</span>
@@ -259,9 +264,12 @@
         <div id="admin-panel" class="hidden mt-8 bg-slate-900 text-slate-100 rounded-2xl p-4 sm:p-6 border border-slate-800 shadow-xl">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
                 <div>
-                    <h3 class="text-lg font-bold text-teal-400">Local Admin Dashboard (This Device Only)</h3>
-                    <p class="text-slate-400 text-xs mt-0.5">Showing records submitted on this browser.</p>
+                    <h3 class="text-lg font-bold text-teal-400">Admin Dashboard (Registered on this phone)</h3>
+                    <p class="text-slate-400 text-xs mt-0.5">Showing records submitted locally.</p>
                 </div>
+                <button onclick="clearLocalCache()" class="bg-rose-950 hover:bg-rose-900 border border-rose-800/60 text-rose-400 px-3 py-1.5 rounded-xl text-xs font-medium transition-all">
+                    Reset Counter
+                </button>
             </div>
 
             <!-- Stats Grid -->
@@ -305,21 +313,15 @@
         </div>
     </footer>
 
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
     <script>
-        const CAPACITY_LIMIT = 30; //
-        
-        const savedPublicKey = "yCaH2C-1PrWSlLD8d";
-        const savedServiceId = "service_efmfuyn";
-        const savedTemplateId = "template_hbq4mgk";
-        emailjs.init(savedPublicKey);
+        const CAPACITY_LIMIT = 30;
+        let submitted = false;
 
         const selectionView = document.getElementById('selection-view');
         const formView = document.getElementById('form-view');
         const successView = document.getElementById('success-view');
         const regForm = document.getElementById('reg-form');
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         function getLocalAttendees() {
             return JSON.parse(localStorage.getItem('glaucoma_attendees')) || [];
@@ -327,7 +329,7 @@
 
         function updateRemainingSeats() {
             const attendees = getLocalAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
+            const f2fCount = attendees.filter(a => a.type === 'Face-to-Face' || a.type === 'f2f').length;
             const remaining = Math.max(0, CAPACITY_LIMIT - f2fCount);
             
             document.getElementById('remaining-seats-badge').innerText = remaining;
@@ -343,13 +345,14 @@
 
         function openRegistration(type) {
             const attendees = getLocalAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
+            const f2fCount = attendees.filter(a => a.type === 'Face-to-Face' || a.type === 'f2f').length;
 
             if (type === 'f2f' && f2fCount >= CAPACITY_LIMIT) {
                 alert("Sorry! This in-person session is fully booked.");
                 return;
             }
-            document.getElementById('input-type').value = type;
+
+            document.getElementById('input-type').value = type === 'f2f' ? 'Face-to-Face' : 'Online';
             const badge = document.getElementById('form-badge');
             const subtext = document.getElementById('form-subtext');
 
@@ -367,9 +370,7 @@
             formView.classList.remove('hidden');
         }
 
-        function submitForm(event) {
-            event.preventDefault();
-
+        function saveLocalRecord() {
             const type = document.getElementById('input-type').value;
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -377,31 +378,21 @@
             const specialty = document.getElementById('specialty').value;
 
             const attendees = getLocalAttendees();
-            
             const newAttendee = { type, fullName, email, phone, specialty, timestamp: new Date().toISOString() };
             attendees.push(newAttendee);
             localStorage.setItem('glaucoma_attendees', JSON.stringify(attendees));
+        }
 
+        function showSuccessPage() {
+            loadingOverlay.classList.add('hidden');
             updateRemainingSeats();
-            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
-
-            if (type === 'f2f' && f2fCount === CAPACITY_LIMIT) {
-                const emailParams = {
-                    attendee_name: fullName,
-                    attendee_email: email,
-                    attendee_phone: phone,
-                    attendee_specialty: specialty,
-                    registration_type: 'Face-to-Face (Hotel) - CAPACITY REACHED',
-                    f2f_count: f2fCount
-                };
-                emailjs.send(savedServiceId, savedTemplateId, emailParams)
-                    .catch(err => console.error("Alert email failed: ", err));
-            }
-
+            
+            const type = document.getElementById('input-type').value;
+            const fullName = document.getElementById('fullName').value.trim();
             const successMsg = document.getElementById('success-message');
             const onlineBox = document.getElementById('online-meeting-box');
             
-            if (type === 'f2f') {
+            if (type === 'Face-to-Face') {
                 successMsg.innerHTML = `Welcome, <strong>${fullName}</strong>! You have successfully booked a live seat at the <strong>Sheraton Hotel</strong>.`;
                 onlineBox.classList.add('hidden');
             } else {
@@ -411,12 +402,16 @@
 
             formView.classList.add('hidden');
             successView.classList.remove('hidden');
+            
+            if(!document.getElementById('admin-panel').classList.contains('hidden')) {
+                renderAdminTable();
+            }
         }
 
         function renderAdminTable() {
             const attendees = getLocalAttendees();
-            const f2fCount = attendees.filter(a => a.type === 'f2f').length;
-            const onlineCount = attendees.filter(a => a.type === 'online').length;
+            const f2fCount = attendees.filter(a => a.type === 'Face-to-Face' || a.type === 'f2f').length;
+            const onlineCount = attendees.filter(a => a.type === 'Online' || a.type === 'online').length;
 
             document.getElementById('admin-f2f-count').innerText = `${f2fCount} / ${CAPACITY_LIMIT}`;
             document.getElementById('admin-online-count').innerText = onlineCount;
@@ -432,7 +427,7 @@
             [...attendees].reverse().forEach(att => {
                 const row = document.createElement('tr');
                 row.className = "border-b border-slate-800/50 hover:bg-slate-800/30";
-                const isF2F = att.type === 'f2f';
+                const isF2F = att.type === 'Face-to-Face' || att.type === 'f2f';
                 const badgeClass = isF2F ? 'bg-teal-950 text-teal-400' : 'bg-blue-950 text-blue-400';
                 
                 row.innerHTML = `
@@ -458,10 +453,18 @@
             }
         }
 
+        function clearLocalCache() {
+            if(confirm("Are you sure you want to clear the local counter for this device?")) {
+                localStorage.removeItem('glaucoma_attendees');
+                updateRemainingSeats();
+                renderAdminTable();
+            }
+        }
+
         function openPasswordModal() { document.getElementById('password-modal').classList.remove('hidden'); }
         function closePasswordModal() { document.getElementById('password-modal').classList.add('hidden'); }
-        function goBack() { formView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); }
-        function goHome() { successView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); }
+        function goBack() { formView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); submitted = false; }
+        function goHome() { successView.classList.add('hidden'); selectionView.classList.remove('hidden'); regForm.reset(); submitted = false; }
 
         window.onload = function() {
             updateRemainingSeats();
