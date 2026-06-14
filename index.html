@@ -4,15 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approach to Patients with Glaucoma - Registration</title>
+    <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #f4f7f6; color: #333; }
-        .hero-section { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px 0; border-bottom: 5px solid #00d2ff; }
-        .card-custom { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: white; }
-        .btn-choice { padding: 20px; font-size: 1.25rem; font-weight: 700; border-radius: 12px; transition: all 0.3s ease; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 0;
+            border-bottom: 5px solid #00d2ff;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: white;
+        }
+        .btn-choice {
+            padding: 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +42,7 @@
     <div class="hero-section text-center">
         <div class="container">
             <h1 class="fw-bold mb-2">Approach to Patients with Glaucoma</h1>
-            <p class="lead mb-0">الندوة العلمية المتخصصة - استمارة التسجيل</p>
+            <p class="lead mb-0">الندوة العلمية المتخصصة لأطباء العيون والمهتمين</p>
         </div>
     </div>
 
@@ -28,47 +50,62 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 
+                <!-- خطوة اختيار نوع الحضور -->
                 <div id="step-1" class="card card-custom p-4 text-center mb-4">
                     <h3 class="fw-bold mb-4 text-secondary">الرجاء اختيار طريقة الحضور المفضلة:</h3>
                     <div class="d-grid gap-3">
-                        <button type="button" class="btn btn-outline-primary btn-choice" onclick="selectType('Face to Face')">📍 حضور وجاهي (Face to Face)</button>
-                        <button type="button" class="btn btn-outline-success btn-choice" onclick="selectType('Online')">💻 حضور افتراضي (Online)</button>
+                        <button type="button" class="btn btn-outline-primary btn-choice" onclick="selectType('Face to Face')">
+                            📍 حضور وجاهي (Face to Face)
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-choice" onclick="selectType('Online')">
+                            💻 حضور افتراضي (Online)
+                        </button>
                     </div>
                 </div>
 
+                <!-- خطوة استمارة البيانات -->
                 <div id="step-2" class="card card-custom p-4" style="display: none;">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h3 class="fw-bold m-0 text-primary" id="form-title">إكمال بيانات التسجيل</h3>
                         <button type="button" class="btn btn-sm btn-secondary" onclick="goBack()">تغيير نوع الحضور</button>
                     </div>
 
-                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { alert('تم التسجيل بنجاح! شكراً لك.'); window.location.reload(); }"></iframe>
+                    <!-- iframe مخفي لمنع إعادة التوجيه لصفحة جوجل بعد الإرسال -->
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showSuccessModal(); }"></iframe>
 
                     <form id="reg-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfT_aKT8RePcFatm9uYUBJ5F-RQhD-bBV8u7oHvThCrokYO2g/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
                         
+                        <!-- الحقول الصحيحة المربوطة بـ Google Form الخاص بك -->
                         <input type="hidden" id="input-type" name="entry.298455297">
 
                         <div class="mb-3">
-                            <label class="form-label">الاسم الكامل (English) *</label>
+                            <label for="fullName" class="form-label">الاسم الكامل (English للشهادة) *</label>
                             <input type="text" name="entry.1407695842" id="fullName" class="form-control" required placeholder="Dr. First Last">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">البريد الإلكتروني *</label>
+                            <label for="email" class="form-label">البريد الإلكتروني *</label>
                             <input type="email" name="entry.1695785341" id="email" class="form-control" required placeholder="name@example.com">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">رقم الهاتف / الواتساب *</label>
+                            <label for="phone" class="form-label">رقم الهاتف / الواتساب *</label>
                             <input type="tel" name="entry.440707602" id="phone" class="form-control" required placeholder="07XXXXXXXX">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">التخصص الطبي *</label>
-                            <input type="text" name="entry.1644307014" id="specialty" class="form-control" required placeholder="مثال: Ophthalmologist">
+                            <label for="specialty" class="form-label">التخصص الطبي *</label>
+                            <select name="entry.1644307014" id="specialty" class="form-select" required>
+                                <option value="" disabled selected>اختر التخصص...</option>
+                                <option value="Ophthalmologist">طبيب عيون (Ophthalmologist)</option>
+                                <option value="Ophthalmology Resident">مقيم عيون (Ophthalmology Resident)</option>
+                                <option value="Optometrist">فاحص بصر / اختصاصي بصريات (Optometrist)</option>
+                                <option value="General Practitioner / Family Medicine">طبيب أسرة / طبيب عام</option>
+                                <option value="Other Medical Specialty">تخصص طبي آخر</option>
+                            </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100 py-2 fs-5 fw-bold">تأكيد حجز المقعد والتسجيل</button>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fs-5 fw-bold" id="submitBtn">تأكيد حجز المقعد والتسجيل</button>
                     </form>
                 </div>
 
@@ -76,17 +113,57 @@
         </div>
     </div>
 
+    <!-- نافذة النجاح المنبثقة وبداخلها زر التيمز للأطباء الأونلاين -->
+    <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3 text-center">
+                <div class="modal-body">
+                    <h3 class="text-success fw-bold mb-3">تم التسجيل بنجاح! 🎉</h3>
+                    <p class="fs-5" id="modal-msg">شكراً لك، تم حفظ مقعدك بنجاح في الندوة العلمية.</p>
+                    
+                    <!-- زر التيمز الفعلي للاجتماع للمسجلين Online -->
+                    <div id="teams-container" style="display:none;" class="mt-4">
+                        <p class="fw-bold text-danger">⚠️ يرجى الضغط على الزر أدناه للانضمام إلى رابط الاجتماع مباشرة ومتابعة الندوة:</p>
+                        <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTRiY2U0ZGEtMzg4Yi00YTM0LWEwYjMtMzI5OGIxYWYzYzgx%40thread.v2/0?context=%7b%22Tid%22%3a%2261a3500a-4712-4fcf-8f19-a4773fa41fbc%22%2c%22Oid%22%3a%2257257005-4c07-4401-b51c-f230da4f09a5%22%7d" target="_blank" class="btn btn-lg btn-success w-100 fw-bold py-3 fs-5">💻 دخول اجتماع Microsoft Teams</a>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary w-100 mt-4" onclick="window.location.reload();">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let submitted = false;
+        let selectedAttendanceType = '';
+
         function selectType(type) {
+            selectedAttendanceType = type;
             document.getElementById('input-type').value = type;
             document.getElementById('form-title').innerText = type === 'Face to Face' ? 'التسجيل للحضور الوجاهي 📍' : 'التسجيل للحضور الافتراضي 💻';
             document.getElementById('step-1').style.display = 'none';
             document.getElementById('step-2').style.display = 'block';
         }
+
         function goBack() {
             document.getElementById('step-2').style.display = 'none';
             document.getElementById('step-1').style.display = 'block';
+        }
+
+        function showSuccessModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+            
+            // إظهار زر التيمز فقط إذا كان نوع الحضور أونلاين
+            if(selectedAttendanceType === 'Online') {
+                document.getElementById('modal-msg').innerText = 'تم تسجيل بياناتك بنجاح للندوة الافتراضية للبروفيسور وسام شحادة.';
+                document.getElementById('teams-container').style.display = 'block';
+            } else {
+                document.getElementById('modal-msg').innerText = 'تم حجز مقعدك الوجاهي بنجاح، ننتظر رؤيتك في الفعالية!';
+                document.getElementById('teams-container').style.display = 'none';
+            }
+            myModal.show();
         }
     </script>
 </body>
